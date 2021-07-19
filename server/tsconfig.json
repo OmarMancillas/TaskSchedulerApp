@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "emitDecoratorMetadata": true,
+    "lib": [
+      "dom",
+      "es2015.promise",
+      "es5"
+    ],
+    "outDir": "./dist",
+    "rootDir": "./../server",
+    "strictPropertyInitialization": true,
+    "moduleResolution": "node"
+  }
+}

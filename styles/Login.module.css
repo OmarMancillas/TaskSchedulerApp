@@ -1,0 +1,63 @@
+.form {
+    background-color: aliceblue;
+    border: 1px solid black;
+    width: 300px;
+    height: 350px;
+    margin: 0 auto;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.input:focus {
+    border: 3px solid #555;
+}
+
+.input {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.loginHeader {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.title {
+    text-align: center;
+}
+
+.signButton {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 2px solid #000000;
+    width: 50%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.signButton:hover {
+    background-color: #15c51e;
+    color: white;
+}
+
+.signButton:hover, .google:hover{
+    cursor: pointer;
+}
+
+.google {
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    /* color: #444; */
+    width: auto;
+    height: auto;
+    /* border: thin solid #888; */
+    /* box-shadow: 1px 1px 1px grey; */
+}
