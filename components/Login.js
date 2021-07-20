@@ -111,7 +111,7 @@ const Login = ({ username, password, setPassword, setUsername }) => {
                         onClick={() => {
                             signIn("github", {
                                 callbackUrl:
-                                    "http://localhost:3000/taskScheduler",
+                                    "https://taskschedulerjs.herokuapp.com/taskScheduler",
                             });
                         }}
                     >
@@ -124,7 +124,7 @@ const Login = ({ username, password, setPassword, setUsername }) => {
                         onClick={() => {
                             signIn("google", {
                                 callbackUrl:
-                                    "http://localhost:3000/taskScheduler",
+                                    "https://taskschedulerjs.herokuapp.com/taskScheduler",
                             });
                         }}
                     >
