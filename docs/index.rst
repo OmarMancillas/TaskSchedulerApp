@@ -15,7 +15,7 @@ About
 ==================
 This app was created for those of us who struggle to organize our tasks and be able to have a better visualization of what we are doing and how much time we are spending on each task.
 
-TaskSchedulerApp is a simple app where you can add as many tasks as you want, a starting time and an ending time. Also we have a functionality that allows us to check the progress of each task based on the starting/ending time.
+TaskSchedulerApp is a simple app where you can add as many tasks as you want, a starting time and an ending time. Also, we have a functionality that allows us to check the progress of each task based on the starting/ending time.
 
 .. image:: ./resources/main.png
     :width: 100%
@@ -45,7 +45,7 @@ A dialog will show, where you can fill the information for the new task.
     :height: 300px
     :alt: Add New Task Dialog
 
-When you click on the "Starts at" or "Ends At" field, a time picker will popup, and with this you can set the starting time for your task.
+When you click on the “Starts at” or “Ends at” field, a time picker will pop up, and with this you can set the starting time for your task.
 
 .. image:: ./resources/timepicker.png
     :width: 300px
@@ -101,7 +101,7 @@ The last functionality is the "Check Progress" button which opens a dialog showi
 Notes
 ==================
 
-The project is still in progress, thus it has not been deployed to a hosting service. 
+The project is still in progress; thus, it has not been deployed to a hosting service.
 
 `Check the project here <https://github.com/OmarMancillas/TaskSchedulerApp/>`_
 ==============================================================================
