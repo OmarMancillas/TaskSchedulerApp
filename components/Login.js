@@ -5,6 +5,9 @@ import React, { useState } from "react";
 import Head from "next/head";
 import { createUserMutation } from "./../graphql/Mutations";
 import { useMutation } from "@apollo/client";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import FunctionsIcon from '@material-ui/icons/Functions';
+import { Button } from "@material-ui/core/";
 
 const Login = ({ username, password, setPassword, setUsername }) => {
     const [toggle, handleToggle] = useState(false);
@@ -17,7 +20,7 @@ const Login = ({ username, password, setPassword, setUsername }) => {
             <h1 className={styles.title}>TaskScheduler.js</h1>
             <div className={styles.form}>
                 <p className={styles.loginHeader}>
-                    {toggle ? "Sign Up" : "Log In "}
+                    {toggle ? "Sign Up" : "Log In With "}
                     <a
                         href=""
                         className={styles.bold}
@@ -28,7 +31,7 @@ const Login = ({ username, password, setPassword, setUsername }) => {
                     ></a>
                 </p>
                 <div className={styles.container}>
-                    <div className={styles.field}>
+                    {/* <div className={styles.field}>
                         <input
                             type="text"
                             className={styles.input}
@@ -100,9 +103,35 @@ const Login = ({ username, password, setPassword, setUsername }) => {
                             </a>
                         </p>
                         <p>or continue with...</p>
-                    </div>
+                    </div> */}
                     {/* <div className="providers"> */}
-                    <button
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            signIn("github", {
+                                callbackUrl:
+                                    "http://localhost:3000/taskScheduler",
+                            });
+                        }}
+                    >
+                        Log In with Github
+                        <GitHubIcon />
+                    </Button><br/><br/>
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            signIn("google", {
+                                callbackUrl:
+                                    "http://localhost:3000/taskScheduler",
+                            });
+                        }}
+                    >
+                        Log In with Google
+                        <FunctionsIcon />
+                    </Button>
+                    {/* <button
                         className={styles.google}
                         title="Continue with Google"
                         onClick={() => {
@@ -131,7 +160,7 @@ const Login = ({ username, password, setPassword, setUsername }) => {
                             src={"./assets/GitHub-Mark-32px.png"}
                             // className={styles.logo}
                         />
-                    </button>
+                    </button> */}
                     {/* </div> */}
                 </div>
             </div>

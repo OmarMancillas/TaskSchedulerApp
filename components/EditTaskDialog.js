@@ -74,7 +74,6 @@ export const EditTaskDialog = ({ username, taskParam, startsAtParam, endsAtParam
                         -Ends at (required): Select the ending time for the task. 
                     </DialogContentText>
                     <TextField
-                        // value={taskParam}
                         required
                         autoFocus
                         margin="dense"
@@ -95,7 +94,6 @@ export const EditTaskDialog = ({ username, taskParam, startsAtParam, endsAtParam
                             label="Starts at: "
                             value={startsAt}
                             onChange={
-                                // console.log(moment(startsAt).format("HH:mm")),
                                 setStartsAt}
                         />
                         <TimePicker

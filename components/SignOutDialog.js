@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { createTaskMutation } from "../graphql/Mutations";
-import { useMutation } from "@apollo/client";
-import { MuiPickersUtilsProvider, TimePicker } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
 import { signOut } from "next-auth/client";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
@@ -26,10 +20,9 @@ export const SignOutDialog = () => {
     return (
         <div>
             <Button
-                variant="outlined"
-                color="primary"
+                // variant="outlined"
+                color="secondary"
                 onClick={handleClickOpen}
-                // style={styles.MuiBottomNavigation}
             >
                 SignOut
                 <ExitToAppIcon />

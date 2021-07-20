@@ -26,14 +26,10 @@ export const NewTaskDialog = ({ username }) => {
         setOpen(false);
     };
 
-    const handleCancel = () => {
-        setOpen(false);
-    };
-
     const handleAdd = async () => {
-        if(task===""){
-            alert("Enter a description for task")
-            return
+        if (task === "") {
+            alert("Enter a description for task");
+            return;
         }
         setOpen(false);
 
@@ -45,77 +41,78 @@ export const NewTaskDialog = ({ username }) => {
                 username: username,
             },
         });
-        window.location.reload()
+        window.location.reload();
     };
-
-    const [selectedStartHour, handleStartHourChange] = useState(new Date());
-    const [selectedEndHour, handleEndHourChange] = useState(new Date());
 
     return (
         <div>
-            <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleClickOpen}
-            >
-                Add new task
-            </Button>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="form-dialog-title"
-            >
-                <DialogTitle id="form-dialog-title">Add new task</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        -Task (required): Add a description of the task you want to add.<br/>
-                        -Start at (required): Select the starting time for the task.<br/>
-                        -Ends at (required): Select the ending time for the task. 
-                    </DialogContentText>
-                    <TextField
-                        required
-                        autoFocus
-                        margin="dense"
-                        id="newTask"
-                        label="Task"
-                        fullWidth
-                        onChange={(e) => {
-                            setTask(e.target.value);
-                        }}
-                    />
-                    <br></br>
-                    
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <TimePicker
-                            clearable
-                            ampm={false}
-                            label="Starts at: "
-                            value={startsAt}
-                            onChange={
-                                // console.log(moment(startsAt).format("HH:mm")),
-                                setStartsAt}
+            <>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleClickOpen}
+                >
+                    Add new task
+                </Button>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">
+                        Add new task
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            -Task (required): Add a description of the task you
+                            want to add.
+                            <br />
+                            -Start at (required): Select the starting time for
+                            the task.
+                            <br />
+                            -Ends at (required): Select the ending time for the
+                            task.
+                        </DialogContentText>
+                        <TextField
+                            required
+                            autoFocus
+                            margin="dense"
+                            id="newTask"
+                            label="Task"
+                            fullWidth
+                            onChange={(e) => {
+                                setTask(e.target.value);
+                            }}
                         />
-                        <TimePicker
-                            clearable
-                            ampm={false}
-                            label="Ends at: "
-                            value={endsAt}
-                            onChange={
-                                setEndsAt}
-                        />
-                    </MuiPickersUtilsProvider>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={
-                        handleAdd
-                        } color="primary">
-                        Add
-                    </Button>
-                </DialogActions>
-            </Dialog>
+                        <br></br>
+
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <TimePicker
+                                clearable
+                                ampm={false}
+                                label="Starts at: "
+                                value={startsAt}
+                                onChange={setStartsAt}
+                            />
+                            <TimePicker
+                                clearable
+                                ampm={false}
+                                label="Ends at: "
+                                value={endsAt}
+                                onChange={setEndsAt}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={handleAdd} color="primary">
+                            Add
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </>
         </div>
     );
 };

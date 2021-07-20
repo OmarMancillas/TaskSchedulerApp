@@ -1,5 +1,5 @@
 import Login from "../components/Login";
-import { getSession, signIn } from "next-auth/client";
+import { signIn, getSession } from "next-auth/client";
 import React, { useState } from "react";
 
 const LoginForm = () => {

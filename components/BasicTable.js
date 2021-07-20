@@ -5,10 +5,10 @@ import { NewTaskDialog } from "./NewTaskDialog";
 import { EditTaskDialog } from "./EditTaskDialog";
 import { DeleteTaskDialog } from "./DeleteTaskDialog";
 import { Button, BottomNavigation } from "@material-ui/core";
-// import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-// import { signOut } from "next-auth/client";
-import { SignOutDialog } from "./SignOutDialog"
+import { SignOutDialog } from "./SignOutDialog";
 import moment from "moment";
+import { CheckProgressDialog } from "./CheckProgressDialog";
+import Image from "next/image"
 
 const COLUMNS = [
     {
@@ -19,7 +19,7 @@ const COLUMNS = [
     {
         Header: "Task",
         accessor: "task", // accessor is the "key" in the data,
-        width: "75%",
+        width: "50%",
     },
     {
         Header: "Starts At",
@@ -32,11 +32,15 @@ const COLUMNS = [
     {
         accessor: "id",
     },
+    {
+        Header: "Progress",
+        accessor: "checkProgress",
+        width: "15%",
+    },
 ];
 
 export const BasicTable = ({ image, name, username, data }) => {
     const columns = useMemo(() => COLUMNS, []);
-    const [open, setOpen] = useState(false);
     const tableInstance = useTable({
         columns,
         data,
@@ -44,38 +48,34 @@ export const BasicTable = ({ image, name, username, data }) => {
             hiddenColumns: ["id"],
         },
     });
-    // const [getAllTasksByUser, { error, data_ }] = useQuery(getAllTasksByUserQuery);
 
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
         tableInstance;
 
-    const handleClickOpen = () => {
-        // setOpen(true);
-    };
-
-    // rows.forEach(r=>{
-    //     r.cells
-    // })
-
     return (
         <>
             <div className={styles.nav}>
-                {name}
-                <img className={styles.avatar} src={image}></img>
+                <div className={styles.logoutButton}>
+                    <SignOutDialog />
+                </div>
+                <div className={styles.userInfo}>
+                    {name}
+                    <Image alt="User's photo" src={image} className={styles.avatar} s ></Image>
+                </div>
             </div>
             <div className={styles.tableContainer}>
                 <NewTaskDialog username={username} />
                 <table className={styles.table} {...getTableProps()}>
                     <thead className={styles.thead}>
-                        {headerGroups.map((headerGroup) => {
+                        {headerGroups.map((headerGroup, key) => {
                             return (
-                                <tr
+                                <tr key={key}
                                     className={styles.tr}
                                     {...headerGroup.getHeaderGroupProps()}
                                 >
-                                    {headerGroup.headers.map((column) => {
+                                    {headerGroup.headers.map((column, key) => {
                                         return (
-                                            <th
+                                            <th key={key}
                                                 className={styles.th}
                                                 {...column.getHeaderProps({
                                                     style: {
@@ -92,38 +92,49 @@ export const BasicTable = ({ image, name, username, data }) => {
                         })}
                     </thead>
                     <tbody className={styles.tbody} {...getTableBodyProps()}>
-                        {
-                            // console.log(rows),
-                            // rows.forEach(r=>{
-                            //     r.cells.forEach(c=>{
-                            //         if(c.column.id==='starts_at' || c.column.id==='ends_at'){
-                            //             c.value = moment(c.value).format('HH:mm:ss')
-                            //         }
-                            //     })
-                            // }),
-                            rows.map((row) => {
-                                prepareRow(row);
-                                // console.log(row);
-                                row.cells.forEach((c) => {
-                                    if (
-                                        c.column.id === "starts_at" ||
-                                        c.column.id === "ends_at"
-                                    ) {
-                                        // console.log(c.value);
-                                        c.value = moment(c.value).format(
-                                            "HH:mm"
-                                        );
-                                        // console.log(c.value);
-                                    }
-                                    if (c.column.id === "edit") {
-                                        // console.log(row);
+                        {rows.map((row, key) => {
+                            prepareRow(row);
+                            row.cells.forEach((c) => {
+                                if (
+                                    c.column.id === "starts_at" ||
+                                    c.column.id === "ends_at"
+                                ) {
+                                    c.value = moment(c.value).format("HH:mm");
+                                }
+                                if (c.column.id === "edit") {
+                                    c.value = (
+                                        <>
+                                            <EditTaskDialog
+                                                username={username}
+                                                taskParam={row['values']['task']}
+                                                startsAtParam={
+                                                    row["values"]["starts_at"]
+                                                }
+                                                endsAtParam={
+                                                    row["values"]["ends_at"]
+                                                }
+                                                idParam={row["values"]["id"]}
+                                            />
+                                            <DeleteTaskDialog
+                                                username={username}
+                                                idParam={row["values"]["id"]}
+                                            />
+                                        </>
+                                    );
+                                }
+                                if (c.column.id === "checkProgress") {
+                                    let ends_at = new Date(row["values"]["ends_at"])
+                                    ends_at.setSeconds(0)
+                                    let current = new Date()
+                                    current.setSeconds(0)
+                                    console.log();
+                                    if (ends_at < current) {
+                                        
+                                        c.value = (<>Finished</>);
+                                    } else {
                                         c.value = (
                                             <>
-                                                <EditTaskDialog
-                                                    username={username}
-                                                    taskParam={
-                                                        c.row.cells[1].value
-                                                    }
+                                                <CheckProgressDialog
                                                     startsAtParam={
                                                         row["values"][
                                                             "starts_at"
@@ -132,47 +143,37 @@ export const BasicTable = ({ image, name, username, data }) => {
                                                     endsAtParam={
                                                         row["values"]["ends_at"]
                                                     }
-                                                    idParam={
-                                                        row["values"]["id"]
-                                                    }
-                                                />
-                                                <DeleteTaskDialog
-                                                    username={username}
-                                                    idParam={
-                                                        row["values"]["id"]
-                                                    }
                                                 />
                                             </>
                                         );
                                     }
-                                });
-                                return (
-                                    <tr
-                                        className={styles.tr}
-                                        {...row.getRowProps()}
-                                    >
-                                        {row.cells.map((rowCell) => {
-                                            return (
-                                                <td
-                                                    className={styles.td}
-                                                    {...rowCell.getCellProps()}
-                                                >
-                                                    {/* {rowCell.render("Cell")} */}
-                                                    {rowCell.value}
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                );
-                            })
-                        }
+                                }
+                            });
+                            return (
+                                <tr key={key}
+                                    className={styles.tr}
+                                    {...row.getRowProps()}
+                                >
+                                    {row.cells.map((rowCell, key) => {
+                                        return (
+                                            <td key={key}
+                                                className={styles.td}
+                                                {...rowCell.getCellProps()}
+                                            >
+                                                {rowCell.value}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
-                <div className={styles.footer}>
+                {/* <div className={styles.footer}>
                     <BottomNavigation>
-                        <SignOutDialog/>
+                        <SignOutDialog />
                     </BottomNavigation>
-                </div>
+                </div> */}
             </div>
         </>
     );
