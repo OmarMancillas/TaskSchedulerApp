@@ -4,7 +4,6 @@ import styles from "./../styles/Tasks.module.css";
 import { NewTaskDialog } from "./NewTaskDialog";
 import { EditTaskDialog } from "./EditTaskDialog";
 import { DeleteTaskDialog } from "./DeleteTaskDialog";
-import { Button, BottomNavigation } from "@material-ui/core";
 import { SignOutDialog } from "./SignOutDialog";
 import moment from "moment";
 import { CheckProgressDialog } from "./CheckProgressDialog";
@@ -60,7 +59,7 @@ export const BasicTable = ({ image, name, username, data }) => {
                 </div>
                 <div className={styles.userInfo}>
                     {name}
-                    <Image alt="User's photo" src={image} className={styles.avatar} s ></Image>
+                    <Image width='35' height='35' alt="User's photo" src={image} className={styles.avatar}></Image>
                 </div>
             </div>
             <div className={styles.tableContainer}>
@@ -127,7 +126,7 @@ export const BasicTable = ({ image, name, username, data }) => {
                                     ends_at.setSeconds(0)
                                     let current = new Date()
                                     current.setSeconds(0)
-                                    console.log();
+                                    console.log(ends_at, current);
                                     if (ends_at < current) {
                                         
                                         c.value = (<>Finished</>);
@@ -169,11 +168,6 @@ export const BasicTable = ({ image, name, username, data }) => {
                         })}
                     </tbody>
                 </table>
-                {/* <div className={styles.footer}>
-                    <BottomNavigation>
-                        <SignOutDialog />
-                    </BottomNavigation>
-                </div> */}
             </div>
         </>
     );

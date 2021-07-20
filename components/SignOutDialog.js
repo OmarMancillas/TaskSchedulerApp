@@ -41,7 +41,7 @@ export const SignOutDialog = () => {
                     <Button
                         onClick={() =>
                             signOut({
-                                callbackUrl: "https://taskschedulerjs.herokuapp.com/login",
+                                callbackUrl: "http://localhost:3000/login",
                             })
                         }
                         color="primary"

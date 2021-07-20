@@ -8,7 +8,6 @@ const client = new ApolloClient({
 });
 
 function MyApp({ Component, pageProps }) {
-    // return <Component {...pageProps} />
     return (
         <ApolloProvider client={client}>
             <Provider session={pageProps.session}>
